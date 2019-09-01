@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.federicovitale.snkrshub.security.SignUpBody;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,6 +14,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Data
@@ -77,7 +77,18 @@ public class User {
     @JsonIgnoreProperties({"user", "id"})
     private UserPreference preferences;
 
-    public void setPasswordEncrypted(String pswd) {
-        this.password = passwordEncoder().encode(pswd);
+    @ManyToMany
+    @JoinTable(
+            name = "user_address",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "address_id")
+    )
+    private List<Address> addresses;
+
+    public void setPasswordEncrypted(String password) {
+        this.password = passwordEncoder().encode(password);
+    }
+    public void encodePassword() {
+        this.password = passwordEncoder().encode(this.password);
     }
 }
