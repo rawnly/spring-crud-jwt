@@ -4,11 +4,12 @@ import com.federicovitale.spring_jwt_boilerplate.models.entities.Todo;
 import com.federicovitale.spring_jwt_boilerplate.models.repos.TodoRepository;
 import com.federicovitale.spring_jwt_boilerplate.models.services.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@SuppressWarnings("ALL")
+@Service
 public class TodoServiceImpl implements TodoService {
     @Autowired
     private TodoRepository todoRepository;

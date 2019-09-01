@@ -79,7 +79,7 @@ public class User {
 
     @ManyToMany
     @JoinTable(
-            name = "user_address",
+            name = "user_address__rel",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "address_id")
     )

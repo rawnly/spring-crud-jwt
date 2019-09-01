@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @SpringBootApplication
 @EnableAsync
 @EnableScheduling
-@EnableWebSecurity
 public class SnkrshubApplication {
     public static void main(String[] args) {
         SpringApplication.run(SnkrshubApplication.class, args);
