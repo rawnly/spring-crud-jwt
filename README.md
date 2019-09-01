@@ -5,7 +5,7 @@
         APP_NAME=Snkrs Hub
         APP_VERSION=1.0.0
     
-        DB_HOST=jdbc:mysql://localhost:3306/snkrshub
+        DB_HOST=spring_jwt_boilerplate
         DB_USER=root
         DB_PASSWORD=root
     
