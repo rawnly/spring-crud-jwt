@@ -7,6 +7,7 @@ import com.federicovitale.spring_jwt_boilerplate.models.entities.User;
 import com.federicovitale.spring_jwt_boilerplate.models.services.EmailService;
 import com.federicovitale.spring_jwt_boilerplate.models.services.impl.UserServiceImpl;
 import com.federicovitale.spring_jwt_boilerplate.security.*;
+import com.federicovitale.spring_jwt_boilerplate.utils.EasyEmail;
 import com.federicovitale.spring_jwt_boilerplate.utils.enums.UserStatusError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,17 +18,17 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.UUID;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/auth")
 public class JWTAuthController {
     @Autowired
@@ -43,7 +44,7 @@ public class JWTAuthController {
     private UserServiceImpl userService;
 
     @Autowired
-    private EmailService emailService;
+    private EasyEmail easyEmail;
 
     @PostMapping("/sign-in")
     public ResponseEntity signIn(@RequestBody JWTRequest body) throws Exception {
@@ -58,17 +59,10 @@ public class JWTAuthController {
         UserStatusError userStatusError = userService.findByUsername(userDetails.getUsername()).map(user -> {
 
             if (user.getActive() && user.getVerified()) {
-                user.setLastLogin(new Date(System.currentTimeMillis()));
+                user.setLastLogin(Timestamp.from(Instant.now()));
 
                 if ( user.getPreferences().getGetNotifiedOnLogin() ) {
-                    SimpleMailMessage mailMessage = new SimpleMailMessage();
-
-                    mailMessage.setFrom("fedevitale99@gmail.com");
-                    mailMessage.setTo(user.getEmail());
-                    mailMessage.setSubject("New Login");
-                    mailMessage.setText(String.format("Hi %s! A new login has been done.", user.getFirstName()));
-
-                    emailService.sendEmail(mailMessage);
+                    easyEmail.sendLoginNotification(user);
                 }
 
                 return UserStatusError.OK;
@@ -116,12 +110,7 @@ public class JWTAuthController {
             return ResponseEntity.badRequest().body(new ErrorDTO("Registration Error", e.getMessage(), 400));
         }
 
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setFrom("fedevitale99@gmail.com");
-        mailMessage.setTo(user.getEmail());
-        mailMessage.setSubject("Welcome Onboard!");
-        mailMessage.setText(String.format("Hi %s! Thanks for having registered with us! Your verify token is: '%s'", user.getFirstName(), user.getEmailVerificationToken()));
-        emailService.sendEmail(mailMessage);
+        easyEmail.sendRegisteredMessage(user);
 
         return ResponseEntity.ok(user);
     }
