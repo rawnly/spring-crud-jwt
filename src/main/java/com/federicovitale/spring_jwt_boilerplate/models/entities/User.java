@@ -62,7 +62,10 @@ public class User {
     private Boolean verified = false;
     private Boolean startedPasswordRecovery = false;
 
-    private Date lastLogin;
+    @JsonIgnore
+    private Date passwordRecoveryStart;
+
+    private Timestamp lastLogin;
 
     @JsonIgnore
     private String resetToken;
