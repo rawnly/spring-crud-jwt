@@ -1,7 +1,5 @@
 package com.federicovitale.spring_jwt_boilerplate.security;
 
-import com.federicovitale.spring_jwt_boilerplate.network.MyVeryCustomCorsFilter;
-import org.springframework.web.filter.CorsFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -35,12 +34,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private JWTFilter jwtFilter;
 
     @Autowired
-    private MyVeryCustomCorsFilter myVeryCustomCorsFilter;
-
-    @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -53,9 +50,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         final CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(Collections.singletonList("*"));
-        config.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept"));
-        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH"));
+        config.addAllowedOrigin("*");
+        config.addAllowedHeader("*"); 
+        config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
 
         return new CorsFilter(source);
@@ -67,6 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
+
 
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {
@@ -91,7 +89,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // Add a filter to validate the tokens with every request
         httpSecurity
-                .addFilter(corsFilter())
+                .addFilterBefore(corsFilter(), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
         ;
 
