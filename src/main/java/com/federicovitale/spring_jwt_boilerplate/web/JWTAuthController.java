@@ -3,16 +3,14 @@ package com.federicovitale.spring_jwt_boilerplate.web;
 import com.federicovitale.spring_jwt_boilerplate.dtos.ErrorDTO;
 import com.federicovitale.spring_jwt_boilerplate.exceptions.EmailExistsException;
 import com.federicovitale.spring_jwt_boilerplate.exceptions.UsernameExistsException;
-import com.federicovitale.spring_jwt_boilerplate.models.entities.User;
-import com.federicovitale.spring_jwt_boilerplate.models.services.EmailService;
-import com.federicovitale.spring_jwt_boilerplate.models.services.impl.UserServiceImpl;
+import com.federicovitale.spring_jwt_boilerplate.models.User.User;
+import com.federicovitale.spring_jwt_boilerplate.models.services.UserPreferenceService;
 import com.federicovitale.spring_jwt_boilerplate.security.*;
 import com.federicovitale.spring_jwt_boilerplate.utils.EasyEmail;
 import com.federicovitale.spring_jwt_boilerplate.utils.enums.UserStatusError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -22,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.UUID;
@@ -41,7 +38,7 @@ public class JWTAuthController {
     private JWTUserDetailsService userDetailsService;
 
     @Autowired
-    private UserServiceImpl userService;
+    private UserPreferenceService.UserServiceImpl userService;
 
     @Autowired
     private EasyEmail easyEmail;

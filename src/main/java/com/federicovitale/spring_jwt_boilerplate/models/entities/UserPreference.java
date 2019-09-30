@@ -1,6 +1,7 @@
 package com.federicovitale.spring_jwt_boilerplate.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.federicovitale.spring_jwt_boilerplate.models.User.User;
 import lombok.Data;
 
 import javax.persistence.*;

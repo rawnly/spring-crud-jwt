@@ -1,6 +1,6 @@
 package com.federicovitale.spring_jwt_boilerplate.security;
 
-import com.federicovitale.spring_jwt_boilerplate.models.services.UserService;
+import com.federicovitale.spring_jwt_boilerplate.models.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
