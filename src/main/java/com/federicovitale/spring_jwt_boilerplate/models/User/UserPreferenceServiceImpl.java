@@ -1,6 +1,6 @@
-package com.federicovitale.spring_jwt_boilerplate.models.services.impl;
+package com.federicovitale.spring_jwt_boilerplate.models.User;
 
-import com.federicovitale.spring_jwt_boilerplate.models.entities.User;
+import com.federicovitale.spring_jwt_boilerplate.models.User.User;
 import com.federicovitale.spring_jwt_boilerplate.models.entities.UserPreference;
 import com.federicovitale.spring_jwt_boilerplate.models.repos.UserPreferenceRepository;
 import com.federicovitale.spring_jwt_boilerplate.models.services.UserPreferenceService;

@@ -1,7 +1,9 @@
-package com.federicovitale.spring_jwt_boilerplate.models.entities;
+package com.federicovitale.spring_jwt_boilerplate.models.User;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.federicovitale.spring_jwt_boilerplate.models.entities.Address;
+import com.federicovitale.spring_jwt_boilerplate.models.entities.UserPreference;
 import com.federicovitale.spring_jwt_boilerplate.security.SignUpBody;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;

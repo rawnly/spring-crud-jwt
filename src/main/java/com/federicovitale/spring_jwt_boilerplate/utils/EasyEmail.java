@@ -1,6 +1,6 @@
 package com.federicovitale.spring_jwt_boilerplate.utils;
 
-import com.federicovitale.spring_jwt_boilerplate.models.entities.User;
+import com.federicovitale.spring_jwt_boilerplate.models.User.User;
 import com.federicovitale.spring_jwt_boilerplate.models.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

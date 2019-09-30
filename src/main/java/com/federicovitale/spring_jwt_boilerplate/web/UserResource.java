@@ -1,6 +1,6 @@
 package com.federicovitale.spring_jwt_boilerplate.web;
 
-import com.federicovitale.spring_jwt_boilerplate.models.services.impl.UserServiceImpl;
+import com.federicovitale.spring_jwt_boilerplate.models.services.UserPreferenceService;
 import com.federicovitale.spring_jwt_boilerplate.utils.EasyEmail;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class UserResource {
     @Autowired
-    private UserServiceImpl userService;
+    private UserPreferenceService.UserServiceImpl userService;
 
     @Autowired
     private EasyEmail easyEmail;

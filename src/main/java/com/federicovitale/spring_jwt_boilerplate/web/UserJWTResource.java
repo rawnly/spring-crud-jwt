@@ -4,8 +4,7 @@ import com.federicovitale.spring_jwt_boilerplate.dtos.ErrorDTO;
 import com.federicovitale.spring_jwt_boilerplate.dtos.MessageDTO;
 import com.federicovitale.spring_jwt_boilerplate.dtos.PasswordResetDTO;
 import com.federicovitale.spring_jwt_boilerplate.dtos.VerifiedUserResponse;
-import com.federicovitale.spring_jwt_boilerplate.models.entities.User;
-import com.federicovitale.spring_jwt_boilerplate.models.services.UserService;
+import com.federicovitale.spring_jwt_boilerplate.models.User.UserService;
 import com.federicovitale.spring_jwt_boilerplate.utils.DateUtil;
 import com.federicovitale.spring_jwt_boilerplate.utils.EasyEmail;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.sql.Date;
 import java.util.UUID;
 
 @RestController

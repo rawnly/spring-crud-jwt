@@ -1,7 +1,7 @@
 package com.federicovitale.spring_jwt_boilerplate.scheduled;
 
-import com.federicovitale.spring_jwt_boilerplate.models.entities.User;
-import com.federicovitale.spring_jwt_boilerplate.models.services.impl.UserServiceImpl;
+import com.federicovitale.spring_jwt_boilerplate.models.User.User;
+import com.federicovitale.spring_jwt_boilerplate.models.services.UserPreferenceService;
 import com.federicovitale.spring_jwt_boilerplate.utils.DateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class PasswordResetCleaner {
     @Autowired
-    private UserServiceImpl userService;
+    private UserPreferenceService.UserServiceImpl userService;
 
     @Scheduled(fixedRate = 1000 * 5)
     public void cleanUp() {

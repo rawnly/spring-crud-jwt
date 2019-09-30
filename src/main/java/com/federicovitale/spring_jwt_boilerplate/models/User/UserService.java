@@ -1,6 +1,7 @@
-package com.federicovitale.spring_jwt_boilerplate.models.services;
+package com.federicovitale.spring_jwt_boilerplate.models.User;
 
-import com.federicovitale.spring_jwt_boilerplate.models.entities.User;
+import com.federicovitale.spring_jwt_boilerplate.models.User.User;
+import com.federicovitale.spring_jwt_boilerplate.models.services.CRUDService;
 
 import java.util.List;
 import java.util.Optional;
